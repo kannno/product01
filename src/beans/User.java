@@ -11,6 +11,17 @@ public class User implements Serializable {
 	private String birthday;
 	private String gender;
 
+	public User(){}
+
+	public User(String password, String userName, String email, String birthday, String gender){
+		this.password = password;
+		this.userName = userName;
+		this.email = email;
+		this.birthday = birthday;
+		this.gender = gender;
+
+	}
+
 
 	/**
 	 * 取得メソッド
