@@ -1,12 +1,8 @@
 package servlet;
 
+import javax.servlet.http.HttpServletRequest;
 
-
-
-
-
-
-
+@WebServlet("/RegisterUser")
 public class RegisterUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +11,7 @@ protected void doGet(HttpServletRequest request,
 	throws ServletException, IOException{
 			
 	//フォワード先
-	String frwardpath = null;
+	String forwardPath = null;
 	
 	//サーブレットクラスの動作を決定するactionの値を
 	//リクエストパラメータから取得
@@ -30,14 +26,14 @@ protected void doGet(HttpServletRequest request,
 	}
 	
 	//登録画面から登録実行をリクエストした時の処理
-	else if(action.equal("done")){
+	else if(action.equals("done")){
 		//セッションスコープに保存された登録ユーザーを取得
 		HttpSession session = request.getSession();
 	    User registerUser = (User) session.getAttribute
 	    		("registerUser");
 	    
 	    //登録情報の呼び出し
-	    RgisterUserLogic logic = new RegisterUserLogic();
+	    RegisterUserLogic logic = new RegisterUserLogic();
 	    logic.register(registerUser);
 	    
 	    //不要となったセッションスコープ内のインスタンスの削除
@@ -57,16 +53,18 @@ protected void doGet(HttpServletRequest request,
     	
     	//リクエストパラメータの取得
     	request.setCharacterEncording("UTF-8");
-    	String id = request.getParameter("id");
-    	String name = request.GetParamerter("name");
-    	String pass = request.GetParameter("pass");
+    	String password = request.getParameter("password");
+    	String userName = request.getParameter("name");
+    	String email = request.getParameter("email");
+    	String birthday = request.getParameter("birthday");
+    	String gender = request.getParameter("gender");
     	
     	//登録するユーザー情報の設定
-    	User registerUser = new User(id,name,pass);
+    	User registerUser = new User(password,userName,email,birthday,gender);
     	
     	//セッションスコープに登録ユーザー情報を保存
-    	Http.session session = request.GetSession();
-    	session.GetAttribute("registerUse","registerUser");
+    	HttpSession session = request.getSession();
+    	session.setAttribute("registerUse","registerUser");
     	
     	//フォワード
     	RequestDispatcher dispatcher =
