@@ -1,6 +1,17 @@
 package servlet;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import beans.User;
+import model.RegisterUserLogic;
 
 @WebServlet("/RegisterUser")
 public class RegisterUser extends HttpServlet {
@@ -48,11 +59,11 @@ protected void doGet(HttpServletRequest request,
 	dispatcher.forward(request,response);
 }
     protected void doPost(HttpServletRequest request,
-    		HttpServeletResponse response)
+    		HttpServletResponse response)
             throws ServletException, IOException{
     	
     	//リクエストパラメータの取得
-    	request.setCharacterEncording("UTF-8");
+    	request.setCharacterEncoding("UTF-8");
     	String password = request.getParameter("password");
     	String userName = request.getParameter("name");
     	String email = request.getParameter("email");
